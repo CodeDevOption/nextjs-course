@@ -11,7 +11,7 @@ const Params = ({ post }) => {
 
 export default Params;
 
-export const getStaticProps = async ({ params }) => {
+export const getServerSideProps = async ({ params }) => {
   const { postId } = params;
   console.log("ReValidate");
   const res = await fetch(
@@ -29,22 +29,5 @@ export const getStaticProps = async ({ params }) => {
     props: {
       post,
     },
-    revalidate: 10,
-  };
-};
-
-export const getStaticPaths = async () => {
-  //   const res = await fetch(`https://jsonplaceholder.typicode.com/posts`);
-  //   const posts = await res.json();
-
-  //   const paths = posts.map((post) => ({
-  //     params: {
-  //       postId: `${post.id}`,
-  //     },
-  //   }));
-
-  return {
-    paths: [],
-    fallback: "blocking",
   };
 };

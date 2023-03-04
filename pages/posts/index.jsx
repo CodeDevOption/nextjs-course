@@ -20,7 +20,7 @@ const Posts = ({ posts }) => {
 
 export default Posts;
 
-export const getStaticProps = async () => {
+export const getServerSideProps = async () => {
   const res = await fetch("https://jsonplaceholder.typicode.com/posts");
   const posts = await res.json();
 
