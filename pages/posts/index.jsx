@@ -7,8 +7,8 @@ const Posts = ({ posts }) => {
     <div>
       <h1>List of Posts</h1>
       {posts.map((post) => (
-        <Link href={`/posts/${post.id}`}>
-          <div key={post.id}>
+        <Link key={post.id} href={`/posts/${post.id}`}>
+          <div>
             <Post {...post} />
           </div>
           <br />

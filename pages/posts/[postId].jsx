@@ -13,6 +13,7 @@ export default Params;
 
 export const getStaticProps = async ({ params }) => {
   const { postId } = params;
+  console.log("ReValidate");
   const res = await fetch(
     `https://jsonplaceholder.typicode.com/posts/${postId}`
   );
@@ -28,6 +29,7 @@ export const getStaticProps = async ({ params }) => {
     props: {
       post,
     },
+    revalidate: 10,
   };
 };
 
