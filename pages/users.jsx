@@ -1,3 +1,4 @@
+import User from "@/components/User";
 import React from "react";
 
 const Users = ({ data }) => {
@@ -6,8 +7,7 @@ const Users = ({ data }) => {
       <h1>List of Users</h1>
       {data.map((user, index) => (
         <div key={index}>
-          <p>name : {user.name}</p>
-          <p>email : {user.email}</p>
+          <User {...user} />
         </div>
       ))}
     </div>
