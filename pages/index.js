@@ -13,10 +13,8 @@ const Home = () => {
       </Head>
 
       <main className={styles.container}>
-        This is the Home Page
-        <Link href="/products">Products</Link>
-        <Link href="/blogs">Blogs</Link>
-        <button onClick={() => router.push("/docs/introduction")}>Doc</button>
+        Pre Rendering
+        <Link href={"/users"}>Users</Link>
       </main>
     </>
   );
