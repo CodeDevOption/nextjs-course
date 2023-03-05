@@ -14,7 +14,7 @@ const Home = () => {
 
       <main className={styles.container}>
         Pre Rendering
-        <Link href={"/users"}>Users</Link>
+        <Link href={"/posts"}>Posts</Link>
       </main>
     </>
   );
