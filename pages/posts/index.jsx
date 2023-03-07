@@ -1,8 +1,22 @@
 import { Post } from "@/components";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
-const Posts = ({ posts }) => {
+const Posts = () => {
+  const [posts, setPost] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const dataFetch = async () => {
+      const res = await fetch(`https://jsonplaceholder.typicode.com/posts`);
+      const data = await res.json();
+      setPost(data);
+      setIsLoading(false);
+    };
+    dataFetch();
+  }, []);
+
+  if (isLoading) return <h1>Loading...</h1>;
   return (
     <div>
       <h1>List of Posts</h1>
@@ -19,14 +33,3 @@ const Posts = ({ posts }) => {
 };
 
 export default Posts;
-
-export const getServerSideProps = async () => {
-  const res = await fetch("https://jsonplaceholder.typicode.com/posts");
-  const posts = await res.json();
-
-  return {
-    props: {
-      posts,
-    },
-  };
-};
