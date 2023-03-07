@@ -30,7 +30,7 @@ Posts.getLayout = (post) => {
 
 export default Posts;
 
-export const getServerSideProps = async ({ query }) => {
+export const getServerSideProps = async ({ query, preview, previewData }) => {
   const { id } = query;
   const reqStr = id ? `/?id=${id}` : "";
   const res = await fetch(
@@ -40,7 +40,7 @@ export const getServerSideProps = async ({ query }) => {
 
   return {
     props: {
-      comments,
+      comments: preview ? [previewData] : comments,
     },
   };
 };
