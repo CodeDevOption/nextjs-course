@@ -1,29 +1,15 @@
-import { Post } from "@/components";
+import { Comment } from "@/components";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import useSWR from "swr";
 
-const Posts = () => {
-  const [posts, setPost] = useState(null);
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    const dataFetch = async () => {
-      const res = await fetch(`https://jsonplaceholder.typicode.com/posts`);
-      const data = await res.json();
-      setPost(data);
-      setIsLoading(false);
-    };
-    dataFetch();
-  }, []);
-
-  if (isLoading) return <h1>Loading...</h1>;
+const Posts = ({ comments }) => {
   return (
     <div>
       <h1>List of Posts</h1>
-      {posts.map((post) => (
-        <Link key={post.id} href={`/posts/${post.id}`}>
+      {comments.map((comment) => (
+        <Link key={comment.id} href={`/posts/?id=${comment.id}`}>
           <div>
-            <Post {...post} />
+            <Comment {...comment} />
           </div>
           <br />
         </Link>
@@ -33,3 +19,18 @@ const Posts = () => {
 };
 
 export default Posts;
+
+export const getServerSideProps = async ({ query }) => {
+  const { id } = query;
+  const reqStr = id ? `/?id=${id}` : "";
+  const res = await fetch(
+    `https://jsonplaceholder.typicode.com/comments${reqStr}`
+  );
+  const comments = await res.json();
+
+  return {
+    props: {
+      comments,
+    },
+  };
+};
