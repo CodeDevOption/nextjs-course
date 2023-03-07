@@ -1,4 +1,5 @@
 import { Comment } from "@/components";
+import Header from "@/components/Header";
 import Link from "next/link";
 import useSWR from "swr";
 
@@ -15,6 +16,15 @@ const Posts = ({ comments }) => {
         </Link>
       ))}
     </div>
+  );
+};
+
+Posts.getLayout = (post) => {
+  return (
+    <>
+      <Header />
+      {post}
+    </>
   );
 };
 
