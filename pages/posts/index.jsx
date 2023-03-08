@@ -1,5 +1,6 @@
 import { Comment } from "@/components";
 import Header from "@/components/Header";
+import { getSession } from "next-auth/react";
 import Link from "next/link";
 import useSWR from "swr";
 
@@ -36,6 +37,7 @@ export const getServerSideProps = async ({ query, preview, previewData }) => {
   const res = await fetch(
     `https://jsonplaceholder.typicode.com/comments${reqStr}`
   );
+
   const comments = await res.json();
 
   return {
